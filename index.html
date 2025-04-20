@@ -31,6 +31,24 @@
 </style><!-- Start of headEnd -->
     
     <!-- End of headEnd -->
+<script>
+  // Handle internal navigation without page reloads
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="/"]');
+    if (link && !link.hasAttribute('data-external')) {
+      e.preventDefault();
+      window.history.pushState({}, '', link.href);
+      // Your Framer page change logic here
+      framerRouter.navigate(link.getAttribute('href'));
+    }
+  });
+
+  // Reset to / on refresh
+  if (window.location.pathname !== '/') {
+    window.history.replaceState({}, '', '/');
+  }
+</script>
+    
 </head>
 <body class="framer-body-yd7nMFDHh-framer-5gasA">
     <script async src="https://events.framer.com/script?v=1" data-fid="80bb8bf9868910de6d9c388f1f458016cd160e65bd04bdb0ec77b093c1b45036" data-no-nt></script>
